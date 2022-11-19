@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,13 +14,12 @@ namespace InterviewTest.Controllers
         public List<KeyValuePair<string, int>> stats { get; set; }
         public void Evolve(int statIncrease = 5)
         {
+
             foreach (var stat in stats.ToList())
             {
-                Console.WriteLine(stat.Key);
-
-                //var removeIndex = stats.FindIndex(stat => stat.Key == stat.key);
-                //removeIndex.RemoveAt(removeIndex);
-                //stats.Add(new KeyValuePair<string, string>(stat.key,  stat.Value + statIncrease));
+                var newStat = (stat.Value / 2) + stat.Value;
+                stats.Remove(stats.First( x=> x.Key == stat.Key));
+                stats.Add(new KeyValuePair<string, int>(stat.Key, newStat));
             }
         }
     }

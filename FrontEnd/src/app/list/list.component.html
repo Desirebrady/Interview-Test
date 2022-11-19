@@ -1,0 +1,41 @@
+<h2 class="heading">Tour of Heroes</h2>
+<div class="container-fluid">
+  <div *ngIf="updateHero">
+    <p>{{updateHero.name}} update stats</p>
+    <p>Strength : {{getHeroesStats('strength', updateHero.stats)}}</p>
+    <p>Intelligence : {{getHeroesStats('intelligence', updateHero.stats)}}</p>
+    <p>Stamina : {{getHeroesStats('stamina', updateHero.stats)}}</p>
+  </div>
+  <div>
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Power</th>
+          <th>Strength</th>
+          <th>Intelligence</th>
+          <th>Stamina</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hero of Heroes"
+            [ngClass]="getColors()">
+          <td>{{hero.name}}</td>
+          <td>{{hero.power}}</td>
+          <td>{{getHeroesStats('strength', hero.stats)}}</td>
+          <td>{{getHeroesStats('intelligence', hero.stats)}}</td>
+          <td>{{getHeroesStats('stamina', hero.stats)}}</td>
+          <td><button (click)="handleEvovle(hero.name, hero)"
+                    type="button"
+                    class="btn btn-primary">Evolve</button>
+            |
+            <button (click)="delete(hero.id)"
+                    type="button"
+                    class="btn btn-primary">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
